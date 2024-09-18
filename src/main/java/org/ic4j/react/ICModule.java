@@ -50,6 +50,7 @@ import org.ic4j.types.Func;
 import org.ic4j.types.Principal;
 import org.ic4j.types.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,11 +89,11 @@ public abstract class ICModule extends ReactContextBaseJavaModule {
 	public ICModule(ReactApplicationContext context) {
 		super(context);
 	}
-	
+
 	public ICModule(ReactApplicationContext context, Identity identity) {
 		super(context);
 		this.identity = identity;
-	}	
+	}
 
 	protected ICModule(ReactApplicationContext context, String location, String canisterId, String effectiveCanisterId,
 			String identityFile) throws URISyntaxException, NoSuchAlgorithmException {
@@ -170,7 +171,7 @@ public abstract class ICModule extends ReactContextBaseJavaModule {
 						path = Paths.get(fileDirectory.getAbsolutePath(), identityAnnotation.pem_file());
 
 					identity = Prime256v1Identity.fromPEMFile(path);
-					break;					
+					break;
 				}
 			}
 		}
@@ -242,18 +243,18 @@ public abstract class ICModule extends ReactContextBaseJavaModule {
 		this.serviceProxy = proxyBuilder.getServiceProxy(service);
 
 	}
-	
-	protected <T> void update(Promise promise, String methodName, Class<T> clazz, Object... args) {	
+
+	protected <T> void update(Promise promise, String methodName, Class<T> clazz, Object... args) {
 		this.call(promise, methodName, clazz, null, args);
 	}
-	
-	protected <T> void query(Promise promise, String methodName, Class<T> clazz, Object... args) {	
-		this.call(promise, methodName, clazz, new Mode[]{Mode.QUERY}, args);
-	}	
-	
-	protected <T> void oneway(Promise promise, String methodName,  Object... args) {	
-		this.call(promise, methodName, Void.class, new Mode[]{Mode.ONEWAY}, args);
-	}	
+
+	protected <T> void query(Promise promise, String methodName, Class<T> clazz, Object... args) {
+		this.call(promise, methodName, clazz, new Mode[] { Mode.QUERY }, args);
+	}
+
+	protected <T> void oneway(Promise promise, String methodName, Object... args) {
+		this.call(promise, methodName, Void.class, new Mode[] { Mode.ONEWAY }, args);
+	}
 
 	protected <T> void call(Promise promise, String methodName, Class<T> clazz, Mode[] modes, Object... args) {
 		try {
@@ -319,5 +320,16 @@ public abstract class ICModule extends ReactContextBaseJavaModule {
 			if (promise != null)
 				promise.reject(e.getMessage(), e);
 		}
+	}
+
+	protected static byte[] toByteArray(InputStream stream) throws IOException {
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		int nRead;
+		byte[] data = new byte[1024];
+		while ((nRead = stream.read(data, 0, data.length)) != -1) {
+			buffer.write(data, 0, nRead);
+		}
+		buffer.flush();
+		return buffer.toByteArray();
 	}
 }

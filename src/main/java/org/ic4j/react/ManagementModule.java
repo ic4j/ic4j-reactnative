@@ -24,7 +24,6 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 
-import org.apache.commons.io.IOUtils;
 import org.ic4j.agent.Waiter;
 import org.ic4j.agent.annotations.Agent;
 import org.ic4j.agent.annotations.Canister;
@@ -35,7 +34,6 @@ import org.ic4j.agent.annotations.IdentityType;
 import org.ic4j.agent.annotations.Properties;
 import org.ic4j.agent.annotations.Transport;
 import org.ic4j.candid.parser.IDLArgs;
-import org.ic4j.candid.types.Mode;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -165,7 +163,7 @@ public final class ManagementModule extends ICModule {
 		try {
 			byte[] sourceBytes = new byte[0];
 			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(wasmModuleFile);
-			sourceBytes = IOUtils.toByteArray(inputStream);
+			sourceBytes = toByteArray(inputStream);
 
 			String encodedString = Base64.getEncoder().encodeToString(sourceBytes);
 
@@ -183,7 +181,7 @@ public final class ManagementModule extends ICModule {
 
 			InputStream inputStream = new DataInputStream(new FileInputStream(path.toFile()));
 
-			sourceBytes = IOUtils.toByteArray(inputStream);
+			sourceBytes = toByteArray(inputStream);
 
 			String encodedString = Base64.getEncoder().encodeToString(sourceBytes);
 
