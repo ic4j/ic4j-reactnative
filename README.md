@@ -13,10 +13,10 @@ To add dependencies, modify the build.gradle file.
  implementation 'commons-io:commons-io:2.11.0'
  implementation 'org.bouncycastle:bcprov-jdk18on:1.78.1'
  implementation 'org.bouncycastle:bcpkix-jdk18on:1.78.1'
- implementation("org.ic4j:ic4j-agent:0.7.1") {
+ implementation("org.ic4j:ic4j-agent:0.8.5") {
       exclude group: 'org.apache.httpcomponents.client5', module: 'httpclient5'
  }
- implementation 'org.ic4j:ic4j-candid:0.7.1'
+ implementation 'org.ic4j:ic4j-candid:0.8.5'
  implementation 'org.slf4j:slf4j-api:2.0.13'
 ```
 
@@ -76,20 +76,20 @@ console.log(`Response is ${response}`);
 
 To add Java IC4J React Native Library to your Java project use Maven or Gradle import from Maven Central.
 
-<a href="https://search.maven.org/artifact/ic4j/ic4j-reactnative/0.7.1/jar">
-https://search.maven.org/artifact/ic4j/ic4j-reactnative/0.7.1/jar
+<a href="https://search.maven.org/artifact/ic4j/ic4j-reactnative/0.8.5/jar">
+https://search.maven.org/artifact/ic4j/ic4j-reactnative/0.8.5/jar
 </a>
 
 ```
 <dependency>
   <groupId>org.ic4j</groupId>
   <artifactId>ic4j-reactnative</artifactId>
-  <version>0.7.1</version>
+  <version>0.8.5</version>
 </dependency>
 ```
 
 ```
-implementation 'org.ic4j:ic4j-reactnative:0.7.1'
+implementation 'org.ic4j:ic4j-reactnative:0.8.5'
 ```
 
 

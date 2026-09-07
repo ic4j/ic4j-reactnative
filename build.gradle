@@ -3,11 +3,12 @@ plugins {
 }
 
 group 'org.ic4j'
-version '0.7.4'
+version '0.8.5'
 
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
     flatDir {
         dirs 'libs'
@@ -44,9 +45,9 @@ dependencies {
 	compileOnly name: 'react-android-0.71.11'	
 	compileOnly group: 'org.slf4j', name: 'slf4j-api', version: '2.0.16'	
     
-    implementation group: 'org.ic4j', name: 'ic4j-agent', version: '0.7.4'
+    implementation group: 'org.ic4j', name: 'ic4j-agent', version: '0.8.5'
     
-	implementation group: 'org.ic4j', name: 'ic4j-candid', version: '0.7.4'	
+	implementation group: 'org.ic4j', name: 'ic4j-candid', version: '0.8.5'
 	
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.16.0'
@@ -77,5 +78,3 @@ dependencies {
 	
 	testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.16'		
 }
-
-
